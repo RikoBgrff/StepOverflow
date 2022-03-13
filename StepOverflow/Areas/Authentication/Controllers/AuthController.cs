@@ -35,7 +35,7 @@ namespace StepOverflow.Areas.Register.Controllers
                     var response = await signInManager.PasswordSignInAsync(user, model.Password, true, true);
                     if (response.Succeeded)
                     {
-                        return Redirect("~/Home/Index");
+                        return RedirectToAction("Index", "Home", new { area = "Main" });
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace StepOverflow.Areas.Register.Controllers
                 var response = await userManager.AddToRoleAsync(user, "Admin");
                 if (result.Succeeded)
                 {
-                    return View();
+                    return RedirectToAction("SignIn", "Auth");
                 }
             }
             return View();

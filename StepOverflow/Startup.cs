@@ -62,7 +62,7 @@ namespace StepOverflow
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=Main}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -10,8 +10,8 @@ using StepOverflow.Context;
 namespace StepOverflow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220312164824_ini")]
-    partial class ini
+    [Migration("20220312180603_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -155,6 +155,9 @@ namespace StepOverflow.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -168,6 +171,8 @@ namespace StepOverflow.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -478,6 +483,13 @@ namespace StepOverflow.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StepOverflow.Entities.AppRole", b =>
+                {
+                    b.HasOne("StepOverflow.Entities.AppUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("StepOverflow.Entities.Benefit", b =>
                 {
                     b.HasOne("StepOverflow.Entities.Job", null)
@@ -522,6 +534,8 @@ namespace StepOverflow.Migrations
                     b.Navigation("Answers");
 
                     b.Navigation("Questions");
+
+                    b.Navigation("Roles");
 
                     b.Navigation("SavedJobs");
 
