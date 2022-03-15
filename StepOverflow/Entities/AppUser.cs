@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace StepOverflow.Entities
 {
-    public class AppUser : IdentityUser
+    public class AppUser : IdentityUser,IEntity
     {
         public List<AppRole> Roles { get; set; }
         public string ProfilePicture { get; set; }
@@ -17,6 +18,7 @@ namespace StepOverflow.Entities
         public int JobStatus { get; set; } = 0;
         public string Resume { get; set; }
         public List<Job> SavedJobs { get; set; }
-
+        public DateTime? CreatedTime { get; set; }
+        int IEntity.Id { get; set; }
     }
 }

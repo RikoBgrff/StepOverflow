@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StepOverflow.Areas.Register.Models;
 using StepOverflow.Entities;
+using System;
 using System.Threading.Tasks;
 
 namespace StepOverflow.Areas.Register.Controllers
@@ -22,22 +23,38 @@ namespace StepOverflow.Areas.Register.Controllers
         public IActionResult SignIn()
         {
             return View();
-        } 
+        }
         [HttpPost]
         public async Task<IActionResult> SignIn(SignInViewModel model)
         {
-            var user = await userManager.FindByNameAsync(model.Username);
-            if (user != null)
+            try
             {
-                var result = await userManager.CheckPasswordAsync(user, model.Password);
-                if (result)
+                var user = await userManager.FindByNameAsync(model.Username);
+                if (user == null)
                 {
-                    var response = await signInManager.PasswordSignInAsync(user, model.Password, true, true);
-                    if (response.Succeeded)
-                    {
-                        return RedirectToAction("Index", "Home", new { area = "Main" });
-                    }
+                    TempData["msg"] = "<script>alert('Check Your Username Again');</script>";
                 }
+                if (user != null)
+                {
+                    var result = await userManager.CheckPasswordAsync(user, model.Password);
+                    if (result)
+                    {
+                        var response = await signInManager.PasswordSignInAsync(user, model.Password, true, true);
+                        if (response.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Home", new { area = "Main" });
+                        }
+                        if (!result)
+                        {
+                            TempData["msg"] = "<script>alert('Check Your Password Again');</script>";
+                        }
+                    }
+
+                }
+            }
+            catch (System.Exception)
+            {
+                TempData["msg"] = "<script>alert('Check Your Username and Password Again');</script>";
             }
             return View(model);
         }
@@ -49,26 +66,40 @@ namespace StepOverflow.Areas.Register.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
-            if (model != null)
+
+            try
             {
-                var user = new AppUser()
+                if (model == null)
                 {
-                    UserName = model.Username,
-                    Email = model.Email,
-                };
-                var role = await roleManager.FindByNameAsync("Admin");
-                if (role == null)
-                {
-                    AppRole role2 = new AppRole();
-                    role2.Name = "Admin";
-                    await roleManager.CreateAsync(role2);
+
                 }
-                var result = await userManager.CreateAsync(user, model.Password);
-                var response = await userManager.AddToRoleAsync(user, "Admin");
-                if (result.Succeeded)
+
+                if (model != null)
                 {
-                    return RedirectToAction("SignIn", "Auth");
+                    var user = new AppUser()
+                    {
+                        UserName = model.Username,
+                        Email = model.Email,
+                        CreatedTime = DateTime.Now
+                    };
+                    var role = await roleManager.FindByNameAsync("Admin");
+                    if (role == null)
+                    {
+                        AppRole role2 = new AppRole();
+                        role2.Name = "Admin";
+                        await roleManager.CreateAsync(role2);
+                    }
+                    var result = await userManager.CreateAsync(user, model.Password);
+                    var response = await userManager.AddToRoleAsync(user, "Admin");
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("SignIn", "Auth");
+                    }
                 }
+            }
+            catch (System.Exception)
+            {
+                TempData["msg"] = "<script>alert('Enter your username, email and password');</script>";
             }
             return View();
         }

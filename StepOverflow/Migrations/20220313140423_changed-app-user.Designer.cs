@@ -10,8 +10,8 @@ using StepOverflow.Context;
 namespace StepOverflow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220312180603_initial")]
-    partial class initial
+    [Migration("20220313140423_changed-app-user")]
+    partial class changedappuser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,6 +196,9 @@ namespace StepOverflow.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
