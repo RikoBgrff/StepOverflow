@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace StepOverflow.Entities
 {
@@ -8,5 +9,6 @@ namespace StepOverflow.Entities
         public DateTime? CreatedTime { get; set; }
 
         public int QuestionId { get; set; }
+        public List<Answer> MyProperty { get; set; }
     }
 }

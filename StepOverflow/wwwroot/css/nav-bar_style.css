@@ -181,6 +181,6 @@ a {
     }
 }
 
-.stepIcon {
-    background: url('../assets/stepoverflow-logo.png');
+.nav_menu_name_text {
+    text-decoration:none;
 }
