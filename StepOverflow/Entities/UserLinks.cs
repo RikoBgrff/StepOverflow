@@ -9,5 +9,9 @@ namespace StepOverflow.Entities
         public string Name { get; set; }
         public string Link { get; set; }
 
-    }
+		public static implicit operator UserLinks(string v)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

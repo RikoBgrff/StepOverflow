@@ -1,0 +1,32 @@
+﻿@model List<StepOverflow.Areas.Main.Models.UsersViewModel>
+<section>
+	<div class="container py-4">
+	
+		@foreach(var item in Model)
+		{
+			
+		<article class="postcard light red">
+			<a class="postcard__img_link" href="#">
+				<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
+			</a>
+			<div class="postcard__text t-dark">
+				<h1 class="postcard__title red"><a href="#">@item.Username</a></h1>
+				<div class="postcard__subtitle small">
+					<time>
+						<i class="fas fa-calendar-alt mr-2"></i>@item.JoinDate
+					</time>
+				</div>
+				<div class="postcard__bar"></div>
+				<div class="postcard__preview-txt">@item.Biography</div>
+				<ul class="postcard__tagbox">
+					<li class="tag__item"><i class="fas fa-tag mr-2"></i>@item.ReputationCount</li>
+					<li class="tag__item"><i class="fas fa-clock mr-2"></i>@item.Location</li>
+					<li class="tag__item play white">
+						<a href="#" style="color:white"><i class="fas fa-play mr-2"></i>Go To GitHub Account</a>
+					</li>
+				</ul>
+			</div>
+		</article>
+		}
+	</div>
+</section>

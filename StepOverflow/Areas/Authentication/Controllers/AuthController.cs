@@ -80,7 +80,15 @@ namespace StepOverflow.Areas.Register.Controllers
                     {
                         UserName = model.Username,
                         Email = model.Email,
-                        CreatedTime = DateTime.Now
+                        CreatedTime = DateTime.Now,
+                        Biography = model.Biography,
+                        Location = model.Location,
+                        PhoneNumber = model.PhoneNumber,
+                        ReputationCount = 0,
+                        Resume = "",
+                        AnswersCount = 0,
+                        QuestionsCount = 0,
+                        
                     };
                     var role = await roleManager.FindByNameAsync("Admin");
                     if (role == null)

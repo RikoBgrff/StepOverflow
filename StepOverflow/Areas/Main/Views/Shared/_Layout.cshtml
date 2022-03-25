@@ -7,26 +7,27 @@
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/nav-bar_style.css" />
 	<link rel="stylesheet" href="~/css/post_style.css" />
+	<link rel="stylesheet" href="~/css/users-style.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-		<div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+	<div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 </header>
 <body id="body-pd">
-		<div class="l-navbar" id="nav-bar">
+	<div class="l-navbar" id="nav-bar">
 		<nav class="nav">
 			<div>
 				<a href="#" class="nav_logo nav_menu_name_text"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">StepOverflow</span> </a>
 				<div class="nav_list">
-					<a href="#" class="nav_link active nav_menu_name_text"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Home</span> </a>
-					<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-					<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Questions</span> </a>
-					<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-card nav_icon'></i> <span class="nav_name">Jobs</span> </a>
+					<a asp-area="Main" asp-controller="Home" asp-action="Index" class="nav_link active nav_menu_name_text"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Home</span> </a>
+					<a asp-area="Main" asp-controller="Users" asp-action="Users" class="nav_link nav_menu_name_text"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+					<a asp-area="Main" asp-controller="Questions" asp-action="Questions" class="nav_link nav_menu_name_text"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Questions</span> </a>
+					<a asp-area="Main" asp-controller="Jobs" asp-action="Jobs"  class="nav_link nav_menu_name_text"> <i class='bx bx-card nav_icon'></i> <span class="nav_name">Jobs</span> </a>
 					<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-building nav_icon'></i> <span class="nav_name">Companies</span> </a>
 				</div>
 				<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-		</div>
-			</nav>
+			</div>
+		</nav>
 	</div>
 
 	<div class="container">
@@ -35,7 +36,7 @@
 		</main>
 	</div>
 
-		
+
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
