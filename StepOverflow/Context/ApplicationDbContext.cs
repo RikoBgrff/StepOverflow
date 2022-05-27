@@ -12,11 +12,17 @@ namespace StepOverflow.Context
         }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Benefit> Benefits { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<Job> Jobs { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<UserLinks> UserLinks { get; set; }
+        //public DbSet<Post> Posts { get; set; }
+        //public DbSet<Benefit> Benefits { get; set; }
+        //public DbSet<Answer> Answers { get; set; }
+        //public DbSet<Job> Jobs { get; set; }
+        //public DbSet<Question> Questions { get; set; }
+        //public DbSet<UserLinks> UserLinks { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+            base.OnModelCreating(builder);
+        }
     }
+    
 }

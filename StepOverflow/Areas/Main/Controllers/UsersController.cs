@@ -31,7 +31,5 @@ namespace StepOverflow.Areas.Main.Controllers
             }).ToListAsync();
             return View(users);
         }
-
-
     }
 }

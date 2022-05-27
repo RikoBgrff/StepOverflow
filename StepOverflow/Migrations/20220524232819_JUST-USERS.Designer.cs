@@ -10,8 +10,8 @@ using StepOverflow.Context;
 namespace StepOverflow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220324211236_update-user")]
-    partial class updateuser
+    [Migration("20220524232819_JUST-USERS")]
+    partial class JUSTUSERS
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,25 +132,35 @@ namespace StepOverflow.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DislikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Answer");
                 });
@@ -158,9 +168,6 @@ namespace StepOverflow.Migrations
             modelBuilder.Entity("StepOverflow.Entities.AppRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -176,8 +183,6 @@ namespace StepOverflow.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -227,6 +232,9 @@ namespace StepOverflow.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -257,6 +265,9 @@ namespace StepOverflow.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -397,6 +408,9 @@ namespace StepOverflow.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AnswerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
@@ -410,6 +424,8 @@ namespace StepOverflow.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AnswerId");
 
                     b.HasIndex("JobId");
 
@@ -497,26 +513,17 @@ namespace StepOverflow.Migrations
 
             modelBuilder.Entity("StepOverflow.Entities.Answer", b =>
                 {
-                    b.HasOne("StepOverflow.Entities.Answer", null)
-                        .WithMany("MyProperty")
-                        .HasForeignKey("AnswerId");
-
-                    b.HasOne("StepOverflow.Entities.AppUser", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("StepOverflow.Entities.Question", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("StepOverflow.Entities.AppRole", b =>
-                {
-                    b.HasOne("StepOverflow.Entities.AppUser", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("AppUserId");
+                    b.HasOne("StepOverflow.Entities.AppUser", "User")
+                        .WithMany("Answers")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.Benefit", b =>
@@ -546,6 +553,10 @@ namespace StepOverflow.Migrations
 
             modelBuilder.Entity("StepOverflow.Entities.Tag", b =>
                 {
+                    b.HasOne("StepOverflow.Entities.Answer", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("AnswerId");
+
                     b.HasOne("StepOverflow.Entities.Job", null)
                         .WithMany("Tags")
                         .HasForeignKey("JobId");
@@ -564,7 +575,7 @@ namespace StepOverflow.Migrations
 
             modelBuilder.Entity("StepOverflow.Entities.Answer", b =>
                 {
-                    b.Navigation("MyProperty");
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.AppUser", b =>
@@ -572,8 +583,6 @@ namespace StepOverflow.Migrations
                     b.Navigation("Answers");
 
                     b.Navigation("Questions");
-
-                    b.Navigation("Roles");
 
                     b.Navigation("SavedJobs");
 

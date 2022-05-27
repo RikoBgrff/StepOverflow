@@ -130,35 +130,42 @@ namespace StepOverflow.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AnswerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DislikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("AnswerId");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Answer");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.AppRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -174,8 +181,6 @@ namespace StepOverflow.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -225,6 +230,9 @@ namespace StepOverflow.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -255,6 +263,9 @@ namespace StepOverflow.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -297,10 +308,63 @@ namespace StepOverflow.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Benefits");
+                    b.ToTable("Benefit");
                 });
 
-            modelBuilder.Entity("StepOverflow.Entities.Post", b =>
+            modelBuilder.Entity("StepOverflow.Entities.Job", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyCountry")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DislikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("JobExperienceLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Job");
+                });
+
+            modelBuilder.Entity("StepOverflow.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,10 +376,6 @@ namespace StepOverflow.Migrations
 
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DislikeCount")
                         .HasColumnType("int");
@@ -329,11 +389,14 @@ namespace StepOverflow.Migrations
                     b.Property<string>("Topic")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
+                    b.HasIndex("UserId");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.Tag", b =>
@@ -343,18 +406,28 @@ namespace StepOverflow.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AnswerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("JobId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("AnswerId");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Tag");
                 });
@@ -383,49 +456,6 @@ namespace StepOverflow.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("UserLinks");
-                });
-
-            modelBuilder.Entity("StepOverflow.Entities.Job", b =>
-                {
-                    b.HasBaseType("StepOverflow.Entities.Post");
-
-                    b.Property<string>("CompanyCountry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobExperienceLevel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobRole")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("Job");
-                });
-
-            modelBuilder.Entity("StepOverflow.Entities.Question", b =>
-                {
-                    b.HasBaseType("StepOverflow.Entities.Post");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("Question_UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("Question");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -481,26 +511,17 @@ namespace StepOverflow.Migrations
 
             modelBuilder.Entity("StepOverflow.Entities.Answer", b =>
                 {
-                    b.HasOne("StepOverflow.Entities.Answer", null)
-                        .WithMany("MyProperty")
-                        .HasForeignKey("AnswerId");
-
-                    b.HasOne("StepOverflow.Entities.AppUser", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("StepOverflow.Entities.Question", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("StepOverflow.Entities.AppRole", b =>
-                {
-                    b.HasOne("StepOverflow.Entities.AppUser", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("AppUserId");
+                    b.HasOne("StepOverflow.Entities.AppUser", "User")
+                        .WithMany("Answers")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.Benefit", b =>
@@ -508,20 +529,6 @@ namespace StepOverflow.Migrations
                     b.HasOne("StepOverflow.Entities.Job", null)
                         .WithMany("Benefits")
                         .HasForeignKey("JobId");
-                });
-
-            modelBuilder.Entity("StepOverflow.Entities.Tag", b =>
-                {
-                    b.HasOne("StepOverflow.Entities.Post", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("PostId");
-                });
-
-            modelBuilder.Entity("StepOverflow.Entities.UserLinks", b =>
-                {
-                    b.HasOne("StepOverflow.Entities.AppUser", null)
-                        .WithMany("UserLinks")
-                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.Job", b =>
@@ -542,9 +549,31 @@ namespace StepOverflow.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StepOverflow.Entities.Tag", b =>
+                {
+                    b.HasOne("StepOverflow.Entities.Answer", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("AnswerId");
+
+                    b.HasOne("StepOverflow.Entities.Job", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("JobId");
+
+                    b.HasOne("StepOverflow.Entities.Question", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("QuestionId");
+                });
+
+            modelBuilder.Entity("StepOverflow.Entities.UserLinks", b =>
+                {
+                    b.HasOne("StepOverflow.Entities.AppUser", null)
+                        .WithMany("UserLinks")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("StepOverflow.Entities.Answer", b =>
                 {
-                    b.Navigation("MyProperty");
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.AppUser", b =>
@@ -553,26 +582,23 @@ namespace StepOverflow.Migrations
 
                     b.Navigation("Questions");
 
-                    b.Navigation("Roles");
-
                     b.Navigation("SavedJobs");
 
                     b.Navigation("UserLinks");
                 });
 
-            modelBuilder.Entity("StepOverflow.Entities.Post", b =>
-                {
-                    b.Navigation("Tags");
-                });
-
             modelBuilder.Entity("StepOverflow.Entities.Job", b =>
                 {
                     b.Navigation("Benefits");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("StepOverflow.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

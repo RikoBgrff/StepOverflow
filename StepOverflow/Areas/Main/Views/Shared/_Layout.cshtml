@@ -1,45 +1,137 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
-<header id="header">
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- CSS -->
 	<title>@ViewData["Title"] - StepOverflow</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/nav-bar_style.css" />
 	<link rel="stylesheet" href="~/css/post_style.css" />
 	<link rel="stylesheet" href="~/css/users-style.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-	<div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-</header>
-<body id="body-pd">
-	<div class="l-navbar" id="nav-bar">
-		<nav class="nav">
-			<div>
-				<a href="#" class="nav_logo nav_menu_name_text"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">StepOverflow</span> </a>
-				<div class="nav_list">
-					<a asp-area="Main" asp-controller="Home" asp-action="Index" class="nav_link active nav_menu_name_text"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Home</span> </a>
-					<a asp-area="Main" asp-controller="Users" asp-action="Users" class="nav_link nav_menu_name_text"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-					<a asp-area="Main" asp-controller="Questions" asp-action="Questions" class="nav_link nav_menu_name_text"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Questions</span> </a>
-					<a asp-area="Main" asp-controller="Jobs" asp-action="Jobs"  class="nav_link nav_menu_name_text"> <i class='bx bx-card nav_icon'></i> <span class="nav_name">Jobs</span> </a>
-					<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-building nav_icon'></i> <span class="nav_name">Companies</span> </a>
-				</div>
-				<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-			</div>
-		</nav>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/animate.css">
+	<link rel="stylesheet" href="~/css/style.css">
+	<link rel="stylesheet" href="~/css/media-queries.css">
+
+	<!-- Favicon and touch icons -->
+	<link rel="shortcut icon" href="assets/ico/favicon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="~/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+<nav class="navbar navbar-dark fixed-top navbar-expand-md navbar-no-bg">
+	<div class="container">
+		<a class="navbar-brand" asp-action="Index">StepOverflow</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto navbar-menu-items fadeIn animated">
+				<li class="nav-item">
+					<a class="nav-link scroll-link" href="#top-content">Top</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link scroll-link" href="#section-1">Item 1</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link scroll-link" href="#section-2">Item 2</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link scroll-link" href="#section-3">Item 3</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link scroll-link" href="#section-4">Item 4</a>
+				</li>
+			</ul>
+			<form class="form-inline navbar-search-form disabled ml-auto" action="" method="post">
+				<input type="search" name="search" placeholder="Type and hit enter..." aria-label="Search" class="search form-control">
+			</form>
+			<ul class="navbar-nav navbar-search-button">
+				<li class="nav-item">
+					<a class="nav-link search-button" href="#"><i class="fas fa-search"></i></a>
+				</li>
+			</ul>
+		</div>
 	</div>
+</nav>
+		@*MAIN VIEW*@
+<div class="container">
+	<main role="main" class="pb-3">
+		@RenderBody()
+	</main>
+</div>
+	@*END MAIN VIEW*@
+
+<footer class="footer-container">
 
 	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
+		<div class="row">
+
+			<div class="col">
+				 StepOverflow Team 2022
+			</div>
+
+		</div>
 	</div>
+	<script src="~/js/jquery-3.3.1.min.js"></script>
+	<script src="~/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	<script src="~/js/jquery.backstretch.min.js"></script>
+	<script src="~/js/wow.min.js"></script>
+	<script src="~/js/retina-1.1.0.min.js"></script>
+	<script src="~/js/waypoints.min.js"></script>
+	<script src="~/js/scripts.js"></script>
+</footer>
+</html>
 
 
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+@*<!DOCTYPE html>
+	<html lang="en">
+	<header id="header">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+	</header>
+
+	<body id="body-pd">
+	<div class="l-navbar" id="nav-bar">
+	<nav class="nav">
+	<div>
+	<a href="#" class="nav_logo nav_menu_name_text"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">StepOverflow</span> </a>
+	<div class="nav_list">
+	<a asp-area="Main" asp-controller="Home" asp-action="Index" class="nav_link active nav_menu_name_text"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Home</span> </a>
+	<a asp-area="Main" asp-controller="Users" asp-action="Users" class="nav_link nav_menu_name_text"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+	<a asp-area="Main" asp-controller="Questions" asp-action="Questions" class="nav_link nav_menu_name_text"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Questions</span> </a>
+	<a asp-area="Main" asp-controller="Jobs" asp-action="Jobs"  class="nav_link nav_menu_name_text"> <i class='bx bx-card nav_icon'></i> <span class="nav_name">Jobs</span> </a>
+	<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-building nav_icon'></i> <span class="nav_name">Companies</span> </a>
+	</div>
+	<a href="#" class="nav_link nav_menu_name_text"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+	</div>
+	</nav>
+	</div>
+*@
+
+
+
+	@*<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	@await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+	</body>
+	</html>
+*@

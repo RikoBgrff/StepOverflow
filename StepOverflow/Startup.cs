@@ -49,20 +49,14 @@ namespace StepOverflow
             app.UseRouting();
 
             app.UseAuthorization();
+            //authentication elave edersen bax da indi 
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                   name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  pattern: "{area:exists=main}/{controller=Home}/{action=Index}/{id?}"
                 );
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{area=Main}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

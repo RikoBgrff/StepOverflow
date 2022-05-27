@@ -9,5 +9,9 @@ namespace StepOverflow.Areas.Main.Controllers
 		{
 			return View();
 		}
+		public IActionResult AskQuestion()
+        {
+			return View();
+        }
 	}
 }
